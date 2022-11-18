@@ -31,11 +31,11 @@ const item1 = new Item({
 });
 
 const item2 = new Item({
-  name: "What's really good?",
+  name: "I am a sef-taught developer.",
 });
 
 const item3 = new Item({
-  name: "Wanna try this list?"
+  name: "This is my first ever project!"
 });
 
 const defaultItems = [item1, item2, item3];
