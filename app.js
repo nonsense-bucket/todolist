@@ -4,10 +4,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
+const path = require('path')
 
 
 const app = express();
-
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -76,7 +77,7 @@ app.post("/", function(req, res){
 
   if (listName === "Today") {
     item.save();
-    res,redirect("/");
+    res.redirect("/");
   } else {
     List.findOne({name: listName}, function(err, foundList){
       foundList.items.push(item);
@@ -89,7 +90,7 @@ app.post("/", function(req, res){
 
 app.post("/delete", function(req, res){
   const checkedItemId = req.body.checkbox;
-  const listName = req.body.listName;
+  const listName = _.capitalize(req.body.listName);
 if (listName === "Today") {
   Item.findByIdAndRemove(checkedItemId, function(err){
     if (!err) {
